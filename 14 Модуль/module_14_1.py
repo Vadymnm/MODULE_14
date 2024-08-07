@@ -32,7 +32,15 @@ balance INTEGER NOT NULL
 #     print(i)
 #     cursor.execute('DELETE FROM Users WHERE username = ?', (f"User{i}",))
 # ------------  выборка и печать всех записей в БД:
+print('  Все пользователи  из БД')
 cursor.execute('SELECT * FROM Users')
+users = cursor.fetchall()
+for user in users:
+    print(f"Имя: {user[1]} |", f"Почта: {user[2]} |", f"Возраст: {user[3]} |", f"Баланс: {user[4]}")
+
+print('===========================================')
+print('  Все пользователи  из БД  кроме 60-летних')
+cursor.execute('SELECT * FROM Users WHERE age !=?',(60,))
 users = cursor.fetchall()
 for user in users:
     print(f"Имя: {user[1]} |", f"Почта: {user[2]} |", f"Возраст: {user[3]} |", f"Баланс: {user[4]}")
