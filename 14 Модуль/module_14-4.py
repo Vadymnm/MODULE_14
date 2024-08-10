@@ -9,7 +9,7 @@ import crud_functions
 
 # *************************************************************************
 
-api = ''
+api = '7100837638:AAFH00gqytpiU6JKLVfdt6TrAAJDEg1GfI0'
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
@@ -25,6 +25,10 @@ butt4 = InlineKeyboardButton(text='Product4', callback_data='product_buying')
 kb = InlineKeyboardMarkup(resize_keyboard=True).row(butt1, butt2, butt3, butt4)
 
 # *************************************************************************
+
+Product = ['Apple','Cherry','Strawberry','Lemon']
+#crud_functions.initiate_db(Product)
+
 @dp.message_handler(commands=['start'])
 async def starter(message):
     await message.answer('Привет ! Я бот, помогающий твоему здоровью', reply_markup=markup1)
@@ -32,11 +36,11 @@ async def starter(message):
 @dp.message_handler(text=['Купить'])
 async def get_buying_list(message):
     await message.answer('Список товаров и  меню  покупки:')
-    users = crud_functions.get_all_products()
-    for user in users:
-        print(f"Название: {user[1]} |", f"Описание: {user[2]} |", f"Цена: {user[3]}")
-        str_out = (f"Название: {user[1]} |", f"Описание: {user[2]} |", f"Цена: {user[3]}")
-        img_name = user[1] + '.jpg'
+    products = crud_functions.get_all_products()
+    for product in products:
+        print(f"Название: {product[1]} |", f"Описание: {product[2]} |", f"Цена: {product[3]}")
+        str_out = (f"Название: {product[1]} |", f"Описание: {product[2]} |", f"Цена: {product[3]}")
+        img_name = product[1] + '.jpg'
 #        print(img_name)
         photo = InputFile(img_name)
         await message.answer(str_out)
@@ -50,6 +54,7 @@ async def send_confirm_message(call):
     await call.message.answer('** Успешная  покупка !!! **')
     print('----------------------------')
     await call.answer()
+
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)

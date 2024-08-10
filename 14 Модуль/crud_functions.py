@@ -13,14 +13,12 @@ price INTEGER
 )
 ''')
 
-Product = ['Apple','Cherry','Srtawberry','Lemon']
-
-def initiate_db():
+def initiate_db(Product):
     for i in range(1, 5):
-        price_ = i * 50
+        price_ = i * 60
         cursor.execute('INSERT INTO Users(title, description, price) VALUES(?, ?, ?)',
-                       (f"{Product[i-1]}", f"description{i}", f"{price_}"))
-
+                       (f"{Product[i-1]}", f"description of {Product[i-1]} ", f"{price_}"))
+    connection.commit()
 
 def get_all_products():
     cursor.execute('SELECT * FROM Users')
@@ -39,5 +37,4 @@ print('----------------------------')
 #
 # print('----------------------------')
 
-# connection.commit()
 # connection.close()
