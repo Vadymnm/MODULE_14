@@ -36,9 +36,11 @@ def add_user(username, email, age):
 
 
 def is_included(username):
+    print(username)
     info = cursor.execute("SELECT * FROM Users WHERE username=?", (username,))
+#    print(info)
     new_user = info.fetchone()
-    print(new_user)
+    print('new user (is included):', new_user)
     return new_user
 
 
