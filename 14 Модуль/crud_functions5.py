@@ -15,13 +15,6 @@ balance INTEGER NOT NULL
 ''')
 
 
-def initiate_db():
-    for i in range(1, 3):
-        age = i * 10
-        cursor.execute('INSERT INTO Users(username, email, age, balance) VALUES(?, ?, ?, ?)',
-                       (f"User{i}", f"{i}example@gmail.com", f"{age}", "1000"))
-
-
 def get_all_users():
     cursor.execute('SELECT * FROM Users')
     users = cursor.fetchall()
@@ -45,6 +38,14 @@ def is_included(username):
 
 
 print('----------------------------')
+
+#  *****  ТО,  ЧТО  ИСПОЛЬЗУЕТСЯ  ТОЛЬКО  ОДИН  РАЗ !!!!  ****
+# def initiate_db():
+#     for i in range(1, 2):
+#         age = i * 10
+#         cursor.execute('INSERT INTO Users(username, email, age, balance) VALUES(?, ?, ?, ?)',
+#                        (f"User{i}", f"{i}example@gmail.com", f"{age}", "1000"))
+
 #
 # initiate_db()
 # add_user('Vasya', 'vasya@gmail.com', 33)
